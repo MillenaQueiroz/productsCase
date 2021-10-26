@@ -54,8 +54,11 @@ fs.readFile('./data.json', 'utf-8', (error, jsonData) => {
     var categorias = [Lanche, FastFood, Japonesa, Chinesa, Oriental, Bebidas, Refeições];
 
     var categoriasName = ["Lanche", "FastFood", "Japonesa", "Chinesa", "Oriental", "Bebidas", "Refeições"];
-    propr = "";
 
+    var changeValue0=false;
+    var changeValue1=false;
+    var changeValue2=false;
+    
         for (p = 0; p < categorias.length; p++) {
             for (let j = 0; j < categorias[p].length; j++) {                                
                 const found = data.establishments[0].productsId.find(element => element === categorias[p][j].id);
@@ -66,6 +69,9 @@ fs.readFile('./data.json', 'utf-8', (error, jsonData) => {
                 }
                 
                 const found1 = data.establishments[1].productsId.find(element => element === categorias[p][j].id);
+                if(categorias[p][j].price % 1 === 0) {  //verifica se é inteiro
+                    categorias[p][j].price = (categorias[p][j].price)/100.0;
+                }
                 if(typeof found1 !== 'undefined') {                
                     if (!establishment.hasOwnProperty(categorias[p][j])) {
                             establishment.ComidaAsiatica.push(categorias[p][j]);
@@ -135,6 +141,12 @@ fs.readFile('./data.json', 'utf-8', (error, jsonData) => {
                 }
             }
         }
+
+        for(i=0; i<newData.Restaurante.length; i++){
+
+        }
+
+        //console.log(newData);
         
     fs.writeFile('./newData.json', JSON.stringify(newData, null, 2), 'utf-8', (error, result) => {
         if (error) {
