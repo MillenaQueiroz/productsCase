@@ -142,10 +142,6 @@ fs.readFile('./data.json', 'utf-8', (error, jsonData) => {
             }
         }
 
-        for(i=0; i<newData.Restaurante.length; i++){
-
-        }
-
         //console.log(newData);
         
     fs.writeFile('./newData.json', JSON.stringify(newData, null, 2), 'utf-8', (error, result) => {
